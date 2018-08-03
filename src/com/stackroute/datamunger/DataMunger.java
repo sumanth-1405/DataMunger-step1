@@ -213,8 +213,8 @@ public class DataMunger {
 	 */
 
 	public String[] getAggregateFunctions(String queryString) {
-		String out = "";
-		boolean bool = false;
+		String output = "";
+		String[] result = null;
 		String[] query1 = queryString.split(" ");
 		String[] query = query1[1].split(",");
 		for (int i = 0; i < query.length; i++) {
@@ -223,13 +223,11 @@ public class DataMunger {
 					|| (query[i].startsWith("count(") && query[i].endsWith(")"))
 					|| (query[i].startsWith("avg(") && query[i].endsWith(")"))
 					|| (query[i].startsWith("sum") && query[i].endsWith(")"))) {
-				out += query[i] + " ";
-				bool = true;
+				output += query[i] + " ";
+				result = output.trim().split(" ");
 			}
 		}
-		String output[] = out.trim().split(" ");
-		if (bool)
-			return output;
-		return null;
+
+		return result;
 	}
 }
